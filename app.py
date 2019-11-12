@@ -31,6 +31,7 @@ from sklearn.feature_selection import chi2
 from sklearn.feature_selection import RFE
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import Imputer
+from sklearn.svm import SVC
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/tasks.db'
@@ -68,6 +69,7 @@ def delete(id):
     
 @app.route('/svm')
 def svm():
+    
     from sklearn.datasets import load_breast_cancer
     from sklearn.model_selection import train_test_split
     from sklearn.preprocessing import StandardScaler
@@ -206,7 +208,6 @@ def svm():
         groupby_levels[level] = obs_idx 
     balanced_copy_idx = [] 
 
-    c=balanced_copy_idx 
     ##############################################
     minmax=preprocessing.MinMaxScaler(feature_range=(0, 1))
     cancer_data=minmax.fit_transform(cancer_data)
@@ -249,12 +250,16 @@ def svm():
     print ("Accuracy(single): %0.2f" % (clf.score(X_test,Y_test)))
     #print(score)    
     print(classification_report(Y_test,Y_pred))
-    clasificacion = classification_report(Y_test,Y_pred)
+
+
+    print ("Cross-Validation:")
+    scores=cross_val_score(clf,cancer_data,cancer_target,cv=10)
+    print (scores)
+    print("Accuracy(cross-val): %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
     ###############################################################
+    clasificacion = classification_report(Y_test,Y_pred)
     return render_template('svm.html', value = clasificacion.split())
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)

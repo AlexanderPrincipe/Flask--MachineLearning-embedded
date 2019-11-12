@@ -13,6 +13,7 @@ sklearn = "*"
 pandas = "*"
 matplotlib = "*"
 seaborn = "*"
+svc = "*"
 
 [requires]
 python_version = "3.7"

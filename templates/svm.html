@@ -9,12 +9,66 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
     <main class="conteiner p-4">
 
         <h1 class="display-4 text-center title mt-4">WebApp-ML</h1>
-        <div>{{value}}</div>
+        <!--
+            <div>{{value}}</div>
+        -->
+        
+
+
+        <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">{{value[0]}}</th>
+                <th scope="col">{{value[1]}}</th>
+                <th scope="col">{{value[2]}}</th>
+                <th scope="col">{{value[3]}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{value[4]}}</td>
+                <td>{{value[5]}}</td>
+                <td>{{value[6]}}</td>
+                <td>{{value[7]}}</td>
+                <td>{{value[8]}}</td>
+              </tr>
+              <tr>
+                <td>{{value[9]}}</td>
+                <td>{{value[10]}}</td>
+                <td>{{value[11]}}</td>
+                <td>{{value[12]}}</td>
+                <td>{{value[13]}}</td>
+              </tr>
+              <tr>
+                <td>{{value[14]}}</td>
+                <td></td>
+                <td></td>
+                <td>{{value[15]}}</td>
+                <td>{{value[16]}}</td>
+              </tr>
+              <tr>
+                <td>{{value[17]}}{{value[18]}}</td>
+                <td>{{value[19]}}</td>
+                <td>{{value[20]}}</td>
+                <td>{{value[21]}}</td>
+                <td>{{value[22]}}</td>
+              </tr>
+              <tr>
+                <td>{{value[23]}}{{value[24]}}</td>
+                <td>{{value[25]}}</td>
+                <td>{{value[26]}}</td>
+                <td>{{value[27]}}</td>
+                <td>{{value[28]}}</td>
+              </tr>
+            </tbody>
+          </table>
 
     
 

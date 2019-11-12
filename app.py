@@ -248,11 +248,12 @@ def svm():
     score = clf.score(X_test,Y_test)
     print ("Accuracy(single): %0.2f" % (clf.score(X_test,Y_test)))
     #print(score)    
-    #print(classification_report(Y_test,Y_pred))
+    print(classification_report(Y_test,Y_pred))
     clasificacion = classification_report(Y_test,Y_pred)
 
     ###############################################################
-    return render_template('svm.html', value = clasificacion)
+    return render_template('svm.html', value = clasificacion.split())
+
 
 
 if __name__ == '__main__':

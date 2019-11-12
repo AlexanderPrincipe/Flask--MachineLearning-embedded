@@ -257,9 +257,13 @@ def svm():
     print (scores)
     print("Accuracy(cross-val): %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
+    accuracy = ("Accuracy(cross-val): %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
     ###############################################################
     clasificacion = classification_report(Y_test,Y_pred)
-    return render_template('svm.html', value = clasificacion.split())
+    return render_template('svm.html', 
+        value = clasificacion.split(), 
+        value1 = accuracy.split(),
+        value2 = scores)
 
 if __name__ == '__main__':
     app.run(debug=True)

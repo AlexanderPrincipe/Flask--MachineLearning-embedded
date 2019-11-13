@@ -232,4 +232,3 @@ print("Accuracy(cross-val): %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 
 fpr, tpr, thresholds = roc_curve(Y_test, Y_pred)
 roc_auc = metrics.auc(fpr, tpr)
 
-clasificacion = classification_report(Y_test,Y_pred)

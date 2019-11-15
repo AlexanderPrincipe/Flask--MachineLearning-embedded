@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request
+import os
 
 from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
@@ -41,10 +43,33 @@ class Task(db.Model):
     content = db.Column(db.String(200))
     done = db.Column(db.Boolean)
 
-@app.route('/')
-def home():
-    tasks = Task.query.all()
-    return render_template('index.html', tasks = tasks)
+
+__author__ = 'ibininja'
+
+app = Flask(__name__)
+
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+@app.route("/")
+def index():
+    return render_template("upload.html")
+
+@app.route("/upload", methods=['POST'])
+def upload():
+    target = os.path.join(APP_ROOT, 'images/')
+    print(target)
+
+    if not os.path.isdir(target):
+        os.mkdir(target)
+
+    for file in request.files.getlist("file"):
+        print(file)
+        filename = file.filename
+        destination = "/".join([target, "tesis2222.csv"])
+        print(destination)
+        file.save(destination)
+
+    return render_template("principal.html")   
 
 @app.route('/create-task', methods=['POST'])
 def create():
@@ -121,7 +146,7 @@ def svm():
     ######################################################################################################################
     ################# dataset nuevo
 
-    cancer_df=pd.read_csv("tesis2222.csv",names=["Edad","Genero","Etnia","Zona",
+    cancer_df=pd.read_csv("images/tesis2222.csv",names=["Edad","Genero","Etnia","Zona",
                                         "Fumador Activo","Hipertensión Arterial Sistemica","Nivel de Glicemia",
                                         "Complicaciones  y Lesiones en Organo Blanco","Antecedentes Fliar  Enfermedad Coronaria",
                                         "Tension SISTOLICA","Tension DIASTOLICA","HTA COMPENSADOS"	,"Colesterol Total","Colesterol HDL","Trigliceridos","Colesterol LDL",
@@ -129,7 +154,7 @@ def svm():
                                         "Peso","Talla","CLAIFICACION IMC","Creatinina","Factor de corrección de la formula","Microalbuminuria","Proteinuria",
                                         "Calculo de  TFG corregida (Cockcroft-Gault)","Estadio IRC","Farmacos Antihipertensivos","Estatina","Antidiabeticos","Adherencia al tratamiento","Diabetes"])
 
-    data=np.genfromtxt("tesis2222.csv",delimiter=",")
+    data=np.genfromtxt("images/tesis2222.csv",delimiter=",")
     #numfields = 39
     #fieldwidth = 5894
     #data = np.genfromtxt("tesis2222.csv", dtype='S%d' % fieldwidth, delimiter=(fieldwidth,)*numfields)
@@ -288,7 +313,7 @@ def rna():
     ######################################################################################################################
     ################# dataset nuevo
 
-    cancer_df=pd.read_csv("tesis2222.csv",names=["Edad","Genero","Etnia","Zona",
+    cancer_df=pd.read_csv("images/tesis2222.csv",names=["Edad","Genero","Etnia","Zona",
                                         "Fumador Activo","Hipertensión Arterial Sistemica","Nivel de Glicemia",
                                         "Complicaciones  y Lesiones en Organo Blanco","Antecedentes Fliar  Enfermedad Coronaria",
                                         "Tension SISTOLICA","Tension DIASTOLICA","HTA COMPENSADOS"	,"Colesterol Total","Colesterol HDL","Trigliceridos","Colesterol LDL",
@@ -296,7 +321,7 @@ def rna():
                                         "Peso","Talla","CLAIFICACION IMC","Creatinina","Factor de corrección de la formula","Microalbuminuria","Proteinuria",
                                         "Calculo de  TFG corregida (Cockcroft-Gault)","Estadio IRC","Farmacos Antihipertensivos","Estatina","Antidiabeticos","Adherencia al tratamiento","Diabetes"])
 
-    data=np.genfromtxt("tesis2222.csv",delimiter=",")
+    data=np.genfromtxt("images/tesis2222.csv",delimiter=",")
 
 
     #para PCA
@@ -504,7 +529,7 @@ def chisvm():
     ######################################################################################################################
     ################# dataset nuevo
 
-    cancer_df=pd.read_csv("tesis2222.csv",names=["Edad","Genero","Etnia","Zona",
+    cancer_df=pd.read_csv("images/tesis2222.csv",names=["Edad","Genero","Etnia","Zona",
                                         "Fumador Activo","Hipertensión Arterial Sistemica","Nivel de Glicemia",
                                         "Complicaciones  y Lesiones en Organo Blanco","Antecedentes Fliar  Enfermedad Coronaria",
                                         "Tension SISTOLICA","Tension DIASTOLICA","HTA COMPENSADOS"	,"Colesterol Total","Colesterol HDL","Trigliceridos","Colesterol LDL",
@@ -512,7 +537,7 @@ def chisvm():
                                         "Peso","Talla","CLAIFICACION IMC","Creatinina","Factor de corrección de la formula","Microalbuminuria","Proteinuria",
                                         "Calculo de  TFG corregida (Cockcroft-Gault)","Estadio IRC","Farmacos Antihipertensivos","Estatina","Antidiabeticos","Adherencia al tratamiento","Diabetes"])
 
-    data=np.genfromtxt("tesis2222.csv",delimiter=",")
+    data=np.genfromtxt("images/tesis2222.csv",delimiter=",")
 
 
     #para PCA

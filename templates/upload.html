@@ -2,17 +2,32 @@
 <html>
 <head>
 <title>Upload</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
 <body>
 
-<form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="cold-md-4 offset-md-4 my-auto">
+            <div class="card">
+                <div class="card-header">
+                        <h1>Files</h1>
+                    <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+                        
+                        <div class="form-group">
+                            <input id="file-picker" type="file" name="file" accept="images/*" multiple>
+                        </div>
+                        <div id="msg"></div>
+                            <input type="submit" value="Upload!" id="upload-button">    
+                    </form>
+                </div>
+            </div>  
+        </div>
+    </div>
 
-    <strong>Files:</strong><br>
-    <input id="file-picker" type="file" name="file" accept="images/*" multiple>
-    <div id="msg"></div>
-    <input type="submit" value="Upload!" id="upload-button">
-</form>
 </body>
 <script>
 
